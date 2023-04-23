@@ -1,43 +1,19 @@
 import Head from 'next/head';
 import styles from '@/styles/Home.module.css';
-import clientPromise from '@/lib/mongodb';
+
 import { useState, useEffect } from 'react';
+export default function Home({ categories, products }) {
+  // const [products, setProducts] = useState([]);
 
-export async function getServerSideProps(context) {
-  try {
-    await clientPromise;
-    // `await clientPromise` will use the default database passed in the MONGODB_URI
-    // However you can use another database (e.g. myDatabase) by replacing the `await clientPromise` with the following code:
-    //
-    // `const client = await clientPromise`
-    // `const db = client.db("myDatabase")`
-    //
-    // Then you can execute queries against your database like so:
-    // db.find({}) or any of the MongoDB Node Driver commands
+  // useEffect(() => {
+  //   getData();
+  // }, []);
 
-    return {
-      props: { isConnected: true },
-    };
-  } catch (e) {
-    console.error(e);
-    return {
-      props: { isConnected: false },
-    };
-  }
-}
-
-export default function Home({ isConnected }) {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    getData();
-  }, []);
-
-  const getData = async () => {
-    const results = await fetch('/api/products');
-    const resultsJson = await results.json();
-    setProducts(resultsJson);
-  };
+  // const getData = async () => {
+  //   const results = await fetch('/api/products');
+  //   const resultsJson = await results.json();
+  //   setProducts(resultsJson);
+  // };
 
   return (
     <>
@@ -57,3 +33,15 @@ export default function Home({ isConnected }) {
     </>
   );
 }
+
+Home.getInitialProps = async (ctx) => {
+  const productsResponse = await fetch(`http://localhost:3000/api/products`);
+  const categoriesResponse = await fetch(
+    `http://localhost:3000/api/categories`
+  );
+
+  const products = await productsResponse.json();
+  const categories = await categoriesResponse.json();
+
+  return { products: products, categories: categories.categories };
+};
