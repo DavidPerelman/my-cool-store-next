@@ -19,5 +19,7 @@ export default async function handler(req, res) {
     const results = await collection.find({}).toArray();
 
     res.status(200).json(results);
-  } catch (error) {}
+  } catch (error) {
+    console.error(error);
+  }
 }
