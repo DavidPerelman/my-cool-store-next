@@ -16,10 +16,7 @@ export default async function handler(req, res) {
 
     const collection = db.collection('categories');
 
-    const results = await collection
-      .find({})
-      .project({ _id: 0, title: 0 })
-      .toArray();
+    const results = await collection.find({}).toArray();
 
     res.status(200).json(results);
   } catch (error) {}
