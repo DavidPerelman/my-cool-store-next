@@ -4,9 +4,6 @@ import '@/styles/globals.css';
 config.autoAddCss = false;
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-// import 'public/static/styles.css';
-// import 'public/static/nprogress.css';
-
 import Layout from '@/components/Layout/Layout';
 import { CartContextProvider } from '@/context/cart-context';
 import { AuthContextProvider } from '@/context/auth-context';

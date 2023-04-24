@@ -28,7 +28,6 @@ Router.onRouteChangeError = function () {
 };
 
 const Header = ({ categories, products }) => {
-  console.log(categories);
   const { data: session, status } = useSession();
   const cartCtx = useContext(CartContext);
   const authCtx = useContext(AuthContext);
@@ -57,7 +56,6 @@ const Header = ({ categories, products }) => {
     },
     [searchBar]
   );
-
   useEffect(() => {
     const handleClick = ({ target }) => {
       handleSearchBar(target.dataset.id);
@@ -65,7 +63,7 @@ const Header = ({ categories, products }) => {
 
     document.addEventListener('click', handleClick);
 
-    setShowLinks(false);
+    // setShowLinks(false);
 
     setCartItemsAmount(cartCtx.items.length);
   }, [cartCtx.items.length, router.pathname, handleSearchBar]);

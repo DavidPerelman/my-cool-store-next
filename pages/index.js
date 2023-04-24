@@ -1,3 +1,4 @@
+import CategoryContainer from '@/components/Layout/CategoryContainer/CategoryContainer';
 import Head from 'next/head';
 // import styles from '@/styles/Home.module.css';
 export default function Home({ categories, products }) {
@@ -9,11 +10,9 @@ export default function Home({ categories, products }) {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <h1>dsds</h1>
-      <h1>dsds</h1>
-      <h1>dsds</h1>
-      <h1>dsds</h1>
-      <h1>dsds</h1>
+      {categories.map((category, i) => (
+        <CategoryContainer category={category} products={products} key={i} />
+      ))}
     </>
   );
 }
