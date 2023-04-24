@@ -2,7 +2,7 @@ import { useContext, useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import Router from 'next/router';
 import Hamburger from '../UI/Hamburger/Hamburger';
-// import Icon from '../UI/Icon/Icon';
+import Icon from '../UI/Icon/Icon';
 import classes from './Header.module.css';
 import nProgress from 'nprogress';
 // import CartContext from '@/context/cart-context';
@@ -121,7 +121,7 @@ const Header = ({ categories, products }) => {
               placeholder='Search Product...'
             />
           </div> */}
-          {/* <div className={classes.icons}>
+          <div className={classes.icons}>
             <Icon
               type={'cart-shopping'}
               size='2xl'
@@ -136,7 +136,7 @@ const Header = ({ categories, products }) => {
               isLoggedIn={isLoggedIn}
               onClick={showUserModalHandler}
             />
-          </div> */}
+          </div>
           <div className={classes.Hamburger}>
             <Hamburger showLinks={showLinks} setShowLinks={setShowLinks} />
           </div>
