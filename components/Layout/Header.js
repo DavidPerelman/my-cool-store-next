@@ -5,12 +5,12 @@ import Hamburger from '../UI/Hamburger/Hamburger';
 import Icon from '../UI/Icon/Icon';
 import classes from './Header.module.css';
 import nProgress from 'nprogress';
-// import CartContext from '@/context/cart-context';
-// import CartModal from '../Layout/CartModal/CartModal';
-// import UserModal from '../Layout/UserModal/UserModal';
-// import AuthContext from '@/context/auth-context';
+import CartContext from '@/context/cart-context';
+import CartModal from '../Layout/CartModal/CartModal';
+import UserModal from '../Layout/UserModal/UserModal';
+import AuthContext from '@/context/auth-context';
 import { useRouter } from 'next/router';
-// import SearchBar from '../Layout/SearchBar/SearchBar';
+import SearchBar from '../Layout/SearchBar/SearchBar';
 import { useSession } from 'next-auth/react';
 
 nProgress.configure({ showSpinner: false });
@@ -30,68 +30,68 @@ Router.onRouteChangeError = function () {
 const Header = ({ categories, products }) => {
   console.log(categories);
   const { data: session, status } = useSession();
-  // const cartCtx = useContext(CartContext);
-  // const authCtx = useContext(AuthContext);
-  // const [cartItemsAmount, setCartItemsAmount] = useState(false);
+  const cartCtx = useContext(CartContext);
+  const authCtx = useContext(AuthContext);
+  const [cartItemsAmount, setCartItemsAmount] = useState(false);
   const [showLinks, setShowLinks] = useState(false);
-  // const [searchBar, setSearchBar] = useState(null);
-  // const searchProductsInputRef = useRef();
-  // const searchCategoriesInputRef = useRef();
+  const [searchBar, setSearchBar] = useState(null);
+  const searchProductsInputRef = useRef();
+  const searchCategoriesInputRef = useRef();
   const isLoggedIn = session && status === 'authenticated';
   const router = useRouter();
 
-  // const handleSearchBar = useCallback(
-  //   (id) => {
-  //     if (searchBar === id || (searchBar && id === undefined)) {
-  //       setSearchBar(null);
-  //     }
-  //     if (searchBar !== id) {
-  //       setSearchBar(id);
-  //     }
+  const handleSearchBar = useCallback(
+    (id) => {
+      if (searchBar === id || (searchBar && id === undefined)) {
+        setSearchBar(null);
+      }
+      if (searchBar !== id) {
+        setSearchBar(id);
+      }
 
-  //     if (id === 'categories') {
-  //       searchProductsInputRef.current.value = '';
-  //     } else {
-  //       searchCategoriesInputRef.current.value = '';
-  //     }
-  //   },
-  //   [searchBar]
-  // );
+      if (id === 'categories') {
+        searchProductsInputRef.current.value = '';
+      } else {
+        searchCategoriesInputRef.current.value = '';
+      }
+    },
+    [searchBar]
+  );
 
-  // useEffect(() => {
-  //   const handleClick = ({ target }) => {
-  //     handleSearchBar(target.dataset.id);
-  //   };
+  useEffect(() => {
+    const handleClick = ({ target }) => {
+      handleSearchBar(target.dataset.id);
+    };
 
-  //   document.addEventListener('click', handleClick);
+    document.addEventListener('click', handleClick);
 
-  //   setShowLinks(false);
+    setShowLinks(false);
 
-  //   setCartItemsAmount(cartCtx.items.length);
-  // }, [cartCtx.items.length, router.pathname, handleSearchBar]);
+    setCartItemsAmount(cartCtx.items.length);
+  }, [cartCtx.items.length, router.pathname, handleSearchBar]);
 
-  // const showCartHandler = () => {
-  //   cartCtx.showCart();
-  // };
+  const showCartHandler = () => {
+    cartCtx.showCart();
+  };
 
-  // const closeCartHandler = () => {
-  //   cartCtx.hideCart();
-  // };
+  const closeCartHandler = () => {
+    cartCtx.hideCart();
+  };
 
-  // const showUserModalHandler = () => {
-  //   authCtx.showUserModal();
-  // };
+  const showUserModalHandler = () => {
+    authCtx.showUserModal();
+  };
 
-  // const closeUserModalHandler = () => {
-  //   authCtx.hideUserModal();
-  // };
+  const closeUserModalHandler = () => {
+    authCtx.hideUserModal();
+  };
 
   return (
     <div className='d-flex flex-column site-container'>
-      {/* {cartCtx.cartIsShown && <CartModal onCloseCart={closeCartHandler} />}
+      {cartCtx.cartIsShown && <CartModal onCloseCart={closeCartHandler} />}
       {authCtx.userModalIsShown && (
         <UserModal onCloseUserModal={closeUserModalHandler} />
-      )} */}
+      )}
       <div className={classes.MyNavbar}>
         <div className={classes['left-side']}>
           <Link className={classes['site-title']} href='/'>
@@ -99,7 +99,7 @@ const Header = ({ categories, products }) => {
           </Link>
         </div>
         <div className={classes['right-side']}>
-          {/* <div
+          <div
             className={classes.links}
             id={showLinks ? classes['hidden'] : ''}
           >
@@ -120,7 +120,7 @@ const Header = ({ categories, products }) => {
               data={products}
               placeholder='Search Product...'
             />
-          </div> */}
+          </div>
           <div className={classes.icons}>
             <Icon
               type={'cart-shopping'}

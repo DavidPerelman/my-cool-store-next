@@ -1,6 +1,17 @@
-import Layout from '@/components/Layout/Layout';
+import { config } from '@fortawesome/fontawesome-svg-core';
+import '@fortawesome/fontawesome-svg-core/styles.css';
 import '@/styles/globals.css';
+config.autoAddCss = false;
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+// import 'public/static/styles.css';
+// import 'public/static/nprogress.css';
+
+import Layout from '@/components/Layout/Layout';
+import { CartContextProvider } from '@/context/cart-context';
+import { AuthContextProvider } from '@/context/auth-context';
 import { SessionProvider } from 'next-auth/react';
+import { OrderContextProvider } from '@/context/order-context';
 
 export default function App({
   Component,
@@ -8,9 +19,15 @@ export default function App({
 }) {
   return (
     <SessionProvider session={session}>
-      <Layout pageProps={pageProps}>
-        <Component {...pageProps} />
-      </Layout>
+      <OrderContextProvider>
+        <AuthContextProvider>
+          <CartContextProvider>
+            <Layout pageProps={pageProps}>
+              <Component {...pageProps} />
+            </Layout>
+          </CartContextProvider>
+        </AuthContextProvider>
+      </OrderContextProvider>
     </SessionProvider>
   );
 }

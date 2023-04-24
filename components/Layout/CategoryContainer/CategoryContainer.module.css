@@ -1,0 +1,67 @@
+.CategoryContainer {
+  margin-top: 1rem;
+}
+
+.category-link {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.Row {
+  display: flex;
+}
+
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.categories-button {
+  display: flex;
+  place-content: center;
+}
+
+.categories-button button {
+  margin-bottom: 1rem;
+  background-color: rgb(77, 22, 1) !important;
+  border: none;
+  border-radius: 25px;
+  color: #fff;
+  font-weight: 700;
+  padding: 0.75rem 3rem;
+}
+
+/* ////////////////////////  */
+
+.container {
+  position: relative;
+  gap: 20px;
+  width: 100%;
+  height: auto;
+  /* background-color: #007bbf; */
+
+  /* add flexbox style */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-flow: wrap;
+}
+
+/* .box {
+  width: 25%;
+  height: auto;
+  margin: 0;
+  box-sizing: border-box;
+} */
+
+@media only screen and (max-width: 800px) {
+  .box {
+    width: 90%;
+  }
+
+  .Row {
+    gap: 1rem;
+  }
+}
