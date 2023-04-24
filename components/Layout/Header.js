@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import Router from 'next/router';
-// import Hamburger from '../UI/Hamburger/Hamburger';
+import Hamburger from '../UI/Hamburger/Hamburger';
 // import Icon from '../UI/Icon/Icon';
 import classes from './Header.module.css';
 import nProgress from 'nprogress';
@@ -28,11 +28,12 @@ Router.onRouteChangeError = function () {
 };
 
 const Header = ({ categories, products }) => {
+  console.log(categories);
   const { data: session, status } = useSession();
   // const cartCtx = useContext(CartContext);
   // const authCtx = useContext(AuthContext);
   // const [cartItemsAmount, setCartItemsAmount] = useState(false);
-  // const [showLinks, setShowLinks] = useState(false);
+  const [showLinks, setShowLinks] = useState(false);
   // const [searchBar, setSearchBar] = useState(null);
   // const searchProductsInputRef = useRef();
   // const searchCategoriesInputRef = useRef();
@@ -90,7 +91,7 @@ const Header = ({ categories, products }) => {
       {/* {cartCtx.cartIsShown && <CartModal onCloseCart={closeCartHandler} />}
       {authCtx.userModalIsShown && (
         <UserModal onCloseUserModal={closeUserModalHandler} />
-      )}
+      )} */}
       <div className={classes.MyNavbar}>
         <div className={classes['left-side']}>
           <Link className={classes['site-title']} href='/'>
@@ -98,7 +99,7 @@ const Header = ({ categories, products }) => {
           </Link>
         </div>
         <div className={classes['right-side']}>
-          <div
+          {/* <div
             className={classes.links}
             id={showLinks ? classes['hidden'] : ''}
           >
@@ -119,8 +120,8 @@ const Header = ({ categories, products }) => {
               data={products}
               placeholder='Search Product...'
             />
-          </div>
-          <div className={classes.icons}>
+          </div> */}
+          {/* <div className={classes.icons}>
             <Icon
               type={'cart-shopping'}
               size='2xl'
@@ -135,12 +136,12 @@ const Header = ({ categories, products }) => {
               isLoggedIn={isLoggedIn}
               onClick={showUserModalHandler}
             />
-          </div>
+          </div> */}
           <div className={classes.Hamburger}>
             <Hamburger showLinks={showLinks} setShowLinks={setShowLinks} />
           </div>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };
