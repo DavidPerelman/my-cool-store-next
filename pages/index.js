@@ -1,20 +1,6 @@
 import Head from 'next/head';
 import styles from '@/styles/Home.module.css';
-
-import { useState, useEffect } from 'react';
 export default function Home({ categories, products }) {
-  // const [products, setProducts] = useState([]);
-
-  // useEffect(() => {
-  //   getData();
-  // }, []);
-
-  // const getData = async () => {
-  //   const results = await fetch('/api/products');
-  //   const resultsJson = await results.json();
-  //   setProducts(resultsJson);
-  // };
-
   return (
     <>
       <Head>
@@ -27,6 +13,11 @@ export default function Home({ categories, products }) {
         {products.map((product) => (
           <div key={product._id}>
             <h1>{product.title}</h1>
+          </div>
+        ))}
+        {categories.map((category) => (
+          <div key={category._id}>
+            <h1>{category.title}</h1>
           </div>
         ))}
       </main>
@@ -43,5 +34,5 @@ Home.getInitialProps = async (ctx) => {
   const products = await productsResponse.json();
   const categories = await categoriesResponse.json();
 
-  return { products: products, categories: categories.categories };
+  return { products: products, categories: categories };
 };
